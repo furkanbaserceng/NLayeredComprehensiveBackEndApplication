@@ -107,6 +107,14 @@ namespace DataAccess.Concrete.InMemory
             _products.Remove(productToDelete);
         }
 
-        
+        public List<Product> GetAll(Expression<Func<Product, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Product Get(Expression<Func<Product, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

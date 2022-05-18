@@ -2,9 +2,10 @@
 
 using Business.Abstract;
 using Business.Concrete;
+using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 
-IProductService _productService = new ProductManager(new InMemoryProductDal());
+IProductService _productService = new ProductManager(new EfProductDal());
 
 foreach (var product in _productService.GetAll())
 {
@@ -16,7 +17,7 @@ foreach (var product in _productService.GetAll())
 
 }
 
-ICategoryService _categoryService=new CategoryManager(new InMemoryCategoryDal());
+ICategoryService _categoryService=new CategoryManager(new EfCategoryDal());
 
 foreach (var category in _categoryService.GetAll())
 {

@@ -21,12 +21,14 @@ namespace DataAccess.Concrete.InMemory
             throw new NotImplementedException();
         }
 
-        public Customer Get(Expression<Func<bool, Customer>> filter)
+        
+
+        public Customer Get(Expression<Func<Customer, bool>> filter)
         {
             throw new NotImplementedException();
         }
 
-        public List<Customer> GetAll(Expression<Func<bool, Customer>> filter = null)
+        public List<Customer> GetAll(Expression<Func<Customer, bool>> filter = null)
         {
             throw new NotImplementedException();
         }
@@ -36,4 +38,7 @@ namespace DataAccess.Concrete.InMemory
             throw new NotImplementedException();
         }
     }
+
+     
 }
+
