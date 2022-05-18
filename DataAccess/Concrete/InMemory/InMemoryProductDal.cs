@@ -3,6 +3,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,6 +20,8 @@ namespace DataAccess.Concrete.InMemory
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
+        /// 
+
         List<Product> _products;
         public InMemoryProductDal()
         {
@@ -58,24 +61,17 @@ namespace DataAccess.Concrete.InMemory
                 }
             };
         }
-        
 
 
-        public List<Product> GetAll()
+        public List<Product> GetAll(Expression<Func<bool, Product>> filter = null)
         {
             return _products;
         }
 
-        /// <summary>
-        /// Where() ile dönen sonuç IEnumerable tipinde olduğundan, sonucu listeye çevirmek gerekir.
-        /// </summary>
-        /// <param name="categoryId"></param>
-        /// <returns></returns>
-        public List<Product> GetByCategoryId(int categoryId)
+        public Product Get(Expression<Func<bool, Product>> filter)
         {
-            return _products.Where(p => p.CategoryId == categoryId).ToList();
+            throw new NotImplementedException();
         }
-
 
         public void Add(Product product)
         {

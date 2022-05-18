@@ -3,6 +3,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,10 +24,8 @@ namespace DataAccess.Concrete.InMemory
             };
         }
 
-        public List<Category> GetAll()
-        {
-            return _categories;
-        }
+        
+       
 
         public void Add(Category category)
         {
@@ -48,6 +47,16 @@ namespace DataAccess.Concrete.InMemory
             categoryToUpdate.CategoryName = category.CategoryName;
 
 
+        }
+
+        public List<Category> GetAll(Expression<Func<bool, Category>> filter = null)
+        {
+            return _categories;
+        }
+
+        public Category Get(Expression<Func<bool, Category>> filter)
+        {
+            throw new NotImplementedException();
         }
     }
 }
