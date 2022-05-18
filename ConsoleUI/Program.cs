@@ -1,16 +1,17 @@
 ﻿
 
+using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Concrete.InMemory;
 
-ProductManager productManager = new ProductManager(new InMemoryProductDal());
+IProductService _productService = new ProductManager(new InMemoryProductDal());
 
-foreach (var item in productManager.GetAll())
+foreach (var product in _productService.GetAll())
 {
 
-    Console.WriteLine(item.ProductName);
-    Console.WriteLine(item.UnitPrice);
-    Console.WriteLine(item.UnitsInStock);
+    Console.WriteLine(product.ProductName);
+    Console.WriteLine(product.UnitPrice);
+    Console.WriteLine(product.UnitsInStock);
     Console.WriteLine("----------------");
 
 }
