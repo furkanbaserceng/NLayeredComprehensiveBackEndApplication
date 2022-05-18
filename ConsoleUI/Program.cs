@@ -16,5 +16,12 @@ foreach (var product in _productService.GetAll())
 
 }
 
+ICategoryService _categoryService=new CategoryManager(new InMemoryCategoryDal());
+
+foreach (var category in _categoryService.GetAll())
+{
+    Console.WriteLine(category.CategoryName);
+}
+
 
 

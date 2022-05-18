@@ -44,7 +44,7 @@ namespace DataAccess.Concrete.InMemory
                 {
                     ProductId=3,
                     CategoryId=2,
-                    ProductName="Mouse",
+                    ProductName="Chair",
                     UnitsInStock=1300,
                     UnitPrice=120
                 },
@@ -52,7 +52,7 @@ namespace DataAccess.Concrete.InMemory
                 {
                     ProductId=4,
                     CategoryId=3,
-                    ProductName="Keyboard",
+                    ProductName="Book",
                     UnitsInStock=250,
                     UnitPrice=560
                 }
