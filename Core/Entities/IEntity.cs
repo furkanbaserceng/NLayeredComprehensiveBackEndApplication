@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Abstract
+namespace Core.Entities
 {
     /// <summary>
     /// Bu abstract nesne; veritabanı nesnelerini gruplamak(imzalamak) için oluşturdum.
