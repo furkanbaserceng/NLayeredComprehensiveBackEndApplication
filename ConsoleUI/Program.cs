@@ -17,15 +17,15 @@ IProductService _productService = new ProductManager(new EfProductDal());
 
 //}
 
-foreach (var product in _productService.GetAllByCategoryId(2))
-{
-    Console.WriteLine(product.ProductName);
-}
-Console.WriteLine("------------------------------");
-foreach (var product in _productService.GetByUnitPrice(5, 10))
-{
-    Console.WriteLine(product.ProductName);
-}
+//foreach (var product in _productService.GetAllByCategoryId(2))
+//{
+//    Console.WriteLine(product.ProductName);
+//}
+//Console.WriteLine("------------------------------");
+//foreach (var product in _productService.GetByUnitPrice(5, 10))
+//{
+//    Console.WriteLine(product.ProductName);
+//}
 
 ICategoryService _categoryService=new CategoryManager(new EfCategoryDal());
 
@@ -34,12 +34,26 @@ ICategoryService _categoryService=new CategoryManager(new EfCategoryDal());
 //    Console.WriteLine(category.CategoryName);
 //}
 
-Console.WriteLine("------------------------");
-foreach (var productDTO in _productService.GetProductDetails())
-{
+//Console.WriteLine("------------------------");
+//foreach (var productDTO in _productService.GetProductDetails())
+//{
 
-    Console.WriteLine(productDTO.ProductName+"-->"+productDTO.CategoryName);
+//    Console.WriteLine(productDTO.ProductName+"-->"+productDTO.CategoryName);
+
+//}
+
+
+var result = _productService.GetProductDetails();
+
+if (result.Success)
+{
+    foreach (var productDto in result.Data)
+    {
+        Console.WriteLine(productDto.ProductName+"-->"+productDto.CategoryName);
+    }
 
 }
-
-
+else
+{
+    Console.WriteLine(result.Message);
+}
