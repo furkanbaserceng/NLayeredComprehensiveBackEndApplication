@@ -34,5 +34,12 @@ ICategoryService _categoryService=new CategoryManager(new EfCategoryDal());
 //    Console.WriteLine(category.CategoryName);
 //}
 
+Console.WriteLine("------------------------");
+foreach (var productDTO in _productService.GetProductDetails())
+{
+
+    Console.WriteLine(productDTO.ProductName+"-->"+productDTO.CategoryName);
+
+}
 
 
