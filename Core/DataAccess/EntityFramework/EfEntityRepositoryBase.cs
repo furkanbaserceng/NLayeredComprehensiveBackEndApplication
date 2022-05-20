@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Core.DataAccess.EntityFramework
 {
-    public class EfEntityRepositoryBase<TContext,TEntity> 
+    public class EfEntityRepositoryBase<TContext,TEntity> :IEntityRepository<TEntity>
         where TContext:DbContext,new()
         where TEntity:class,IEntity,new()
     {
