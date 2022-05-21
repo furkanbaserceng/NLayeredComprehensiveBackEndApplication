@@ -74,5 +74,17 @@ namespace Business.Concrete
             
              
         }
+
+        public IResult Update(Product product)
+        {
+            _productDal.Update(product);
+            return new SuccessResult(Messages.ProductSuccessfullyUpdated);
+        }
+
+        public IResult Delete(Product product)
+        {
+            _productDal.Delete(product);
+            return new SuccessResult(Messages.ProductSuccessfullyDeleted);
+        }
     }
 }
