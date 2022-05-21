@@ -32,7 +32,7 @@ namespace Business.Concrete
         public IDataResult<List<Product>> GetAll()
         {
             
-            if (DateTime.Now.Hour == 22)
+            if (DateTime.Now.Hour == 19)
             {
                 //Bu kullanımda data göndermedik.Null gideceğinden front-end kısmında ona göre işlem yaptırılacak.Burdan bir liste geldiğini anlayıp ona göre ayarlayacak ama data olmayacak.
                 return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
