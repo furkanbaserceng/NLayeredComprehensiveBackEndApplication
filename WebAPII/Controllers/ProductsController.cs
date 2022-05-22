@@ -45,6 +45,41 @@ namespace WebAPII.Controllers
 
         }
 
+        [HttpGet("getallbycategoriid")]
+        public IActionResult GetAllByCategoryId(int categoryId)
+        {
+            var result = _productService.GetAllByCategoryId(categoryId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+
+        }
+
+        [HttpGet("getbyunitprice")]
+        public IActionResult GetByUnitPrice(decimal min,decimal max)
+        {
+            var result = _productService.GetByUnitPrice(min,max);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+
+        }
+
+        [HttpGet("getproductdetails")]
+        public IActionResult GetProductDetails()
+        {
+            var result = _productService.GetProductDetails();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+
+        }
 
         [HttpPost("add")]
         public IActionResult Add(Product product)
@@ -59,7 +94,7 @@ namespace WebAPII.Controllers
 
         }
 
-        [HttpPost("update")]
+        [HttpPut("update")]
         public IActionResult Update(Product product)
         {
             var result = _productService.Update(product);
@@ -71,7 +106,7 @@ namespace WebAPII.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("delete")]
+        [HttpDelete("delete")]
         public IActionResult Delete(Product product)
         {
             var result = _productService.Delete(product);
