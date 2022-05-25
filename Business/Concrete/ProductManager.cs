@@ -3,6 +3,7 @@ using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -69,23 +70,19 @@ namespace Business.Concrete
         [ ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
-            //ValidationTool.Validate(new ProductValidator(),product);
+            
 
-            if (CheckIfProductNameExists(product.ProductName).Success //nested olarak vermek daha uygun olur bazen.Kontrol için.
-                    && CheckIfProductCountOfCategory(product.CategoryId).Success)
+            var result=BusinessRules.Run(CheckIfProductNameExists(product.ProductName),
+                              CheckIfProductCountOfCategory(product.CategoryId));
+
+            if (result != null)
             {
-
-                _productDal.Add(product);
-                return new SuccessResult(Messages.ProductSuccessfullyAdded);
+                return result;
             }
 
-            return new ErrorResult();
-           
-            
-
-            
-            
-             
+            _productDal.Add(product);
+             return new SuccessResult(Messages.ProductSuccessfullyAdded);
+  
         }
 
         [ValidationAspect(typeof(Product))]
