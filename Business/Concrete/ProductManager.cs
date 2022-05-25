@@ -25,11 +25,14 @@ namespace Business.Concrete
     public class ProductManager : IProductService
     {
         private IProductDal _productDal;
+        private ICategoryService _categoryService;
+        
 
-        public ProductManager(IProductDal productDal)
+        public ProductManager(IProductDal productDal,ICategoryService categoryService)
         {
             _productDal = productDal;
-
+            _categoryService = categoryService;
+                
         }
 
         
@@ -67,13 +70,14 @@ namespace Business.Concrete
             return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == productId));
         }
 
-        [ ValidationAspect(typeof(ProductValidator))]
+        [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
             
 
             var result=BusinessRules.Run(CheckIfProductNameExists(product.ProductName),
-                              CheckIfProductCountOfCategory(product.CategoryId));
+                              CheckIfProductCountOfCategory(product.CategoryId), 
+                              CheckIfCategoryLimitedExceded());
 
             if (result != null)
             {
@@ -128,6 +132,19 @@ namespace Business.Concrete
             if (result)
             {
                 return new ErrorResult(Messages.ProductNameAlreadyExists);
+            }
+
+            return new SuccessResult();
+        }
+
+        private IResult CheckIfCategoryLimitedExceded()
+        {
+
+            var result = _categoryService.GetAll();
+
+            if (result.Data.Count >= 15)
+            {
+                return new ErrorResult();
             }
 
             return new SuccessResult();

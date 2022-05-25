@@ -3,9 +3,9 @@
 using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
-using DataAccess.Concrete.InMemory;
+//using DataAccess.Concrete.InMemory;
 
-IProductService _productService = new ProductManager(new EfProductDal());
+//IProductService _productService = new ProductManager(new EfProductDal());
 
 //foreach (var product in _productService.GetAll())
 //{
@@ -43,20 +43,20 @@ ICategoryService _categoryService=new CategoryManager(new EfCategoryDal());
 //}
 
 
-var result = _productService.GetProductDetails();
+//var result = _productService.GetProductDetails();
 
-if (result.Success)
-{
-    foreach (var productDto in result.Data)
-    {
-        Console.WriteLine(productDto.ProductName+"-->"+productDto.CategoryName);
-    }
+//if (result.Success)
+//{
+//    foreach (var productDto in result.Data)
+//    {
+//        Console.WriteLine(productDto.ProductName+"-->"+productDto.CategoryName);
+//    }
 
-}
-else
-{
-    Console.WriteLine(result.Message);
-}
+//}
+//else
+//{
+//    Console.WriteLine(result.Message);
+//}
 
 
 
