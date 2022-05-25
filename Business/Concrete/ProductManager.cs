@@ -71,12 +71,24 @@ namespace Business.Concrete
         {
             //ValidationTool.Validate(new ProductValidator(),product);
 
-            _productDal.Add(product);
-            return new SuccessResult(Messages.ProductSuccessfullyAdded);
+            if (CheckIfProductNameExists(product.ProductName).Success //nested olarak vermek daha uygun olur bazen.Kontrol için.
+                    && CheckIfProductCountOfCategory(product.CategoryId).Success)
+            {
+
+                _productDal.Add(product);
+                return new SuccessResult(Messages.ProductSuccessfullyAdded);
+            }
+
+            return new ErrorResult();
+           
+            
+
+            
             
              
         }
 
+        [ValidationAspect(typeof(Product))]
         public IResult Update(Product product)
         {
             _productDal.Update(product);
@@ -88,5 +100,41 @@ namespace Business.Concrete
             _productDal.Delete(product);
             return new SuccessResult(Messages.ProductSuccessfullyDeleted);
         }
+
+
+
+        private IResult CheckIfProductCountOfCategory(int categoryId)
+        {
+
+            var result = _productDal.GetAll(p => p.CategoryId == categoryId).Count;
+
+            if (result >= 15)
+            {
+                return new ErrorResult(Messages.ProductCountOfCategoryError);
+            }
+
+            return new SuccessResult();
+        }
+
+        private IResult CheckIfProductNameExists(string productName)
+        {
+
+            //var result = _productDal.Get(p => p.ProductName == productName);
+
+            //if (result.ProductName==productName) yada yine getall deyip counta bakılır, result!=null ise de denilebilir.
+            //{
+            //    return new ErrorResult(Messages.ProductNameSameError);
+            //}
+
+            var result = _productDal.GetAll(p => p.ProductName == productName).Any();//any bool döndürür.
+
+            if (result)
+            {
+                return new ErrorResult(Messages.ProductNameAlreadyExists);
+            }
+
+            return new SuccessResult();
+        }
+
     }
 }

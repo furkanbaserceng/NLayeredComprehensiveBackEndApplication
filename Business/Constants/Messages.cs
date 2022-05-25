@@ -21,8 +21,8 @@ namespace Business.Constants
 
         public static string ProductsListed = "Products Listed Successfully!";
 
-        
+        public static string ProductCountOfCategoryError = "There can be a maximum of 10 products in the product category to be added.";
 
-
+        public static string ProductNameAlreadyExists="Same product name can not be added!";
     }
 }

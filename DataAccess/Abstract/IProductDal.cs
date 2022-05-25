@@ -17,8 +17,6 @@ namespace DataAccess.Abstract
         List<ProductDetailDto> GetProductDetails();
         
 
-       
-
 
     }
 }

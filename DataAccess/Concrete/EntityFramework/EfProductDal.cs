@@ -14,6 +14,8 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfProductDal : EfEntityRepositoryBase<NorthwindContext, Product>, IProductDal
     {
+        
+
         public List<ProductDetailDto> GetProductDetails()
         {
 
@@ -37,5 +39,9 @@ namespace DataAccess.Concrete.EntityFramework
 
             
         }
+
+        
+
+
     }
 }
