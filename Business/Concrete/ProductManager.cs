@@ -66,7 +66,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == productId));
         }
 
-        [ValidationAspect(typeof(ProductValidator))]
+        [ ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
             //ValidationTool.Validate(new ProductValidator(),product);
