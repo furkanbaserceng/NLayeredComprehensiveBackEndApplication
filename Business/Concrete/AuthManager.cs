@@ -43,17 +43,18 @@ namespace Business.Concrete
         public IDataResult<User> Login(UserForLoginDto userForLoginDto)
         {
             var userToCheck = _userService.GetByMail(userForLoginDto.Email);
+            
             if (userToCheck == null)
             {
                 return new ErrorDataResult<User>("User Not Found!");
             }
 
-            if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, userToCheck.PasswordHash, userToCheck.PasswordSalt))
+            if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, userToCheck.Data.PasswordHash, userToCheck.Data.PasswordSalt))
             {
                 return new ErrorDataResult<User>("Password Error!");
             }
 
-            return new SuccessDataResult<User>(userToCheck, "Login to Successfully!");
+            return new SuccessDataResult<User>(userToCheck.Data, "Login to Successfully!");
         }
 
         public IResult UserExists(string email)
@@ -68,7 +69,7 @@ namespace Business.Concrete
         public IDataResult<AccessToken> CreateAccessToken(User user)
         {
             var claims = _userService.GetClaims(user);
-            var accessToken = _tokenHelper.CreateToken(user, claims);
+            var accessToken = _tokenHelper.CreateToken(user,claims.Data);
             return new SuccessDataResult<AccessToken>(accessToken, "Access Token Created!");
         }
     }
