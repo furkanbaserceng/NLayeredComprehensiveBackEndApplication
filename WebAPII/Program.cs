@@ -9,6 +9,7 @@ using Core.Utilities.Security.JWT;
 using DataAccess.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.IdentityModel.Tokens;
 using System.Configuration;
 
@@ -41,6 +42,12 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 });
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+//builder.Services.AddSingleton<ICacheService, MemoryCacheManager>();
+//builder.Services.AddMemoryCache();
+
+builder.Services.AddCors();
+
+
 
 var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<Core.Utilities.Security.JWT.TokenOptions>();
 
@@ -70,11 +77,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors();
 app.UseHttpsRedirection();
 
-app.UseAuthentication();
+//app.UseAuthentication();
 
 app.UseAuthorization();
+
 
 
 app.MapControllers();
