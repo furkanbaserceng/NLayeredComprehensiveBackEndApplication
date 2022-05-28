@@ -45,7 +45,7 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 //builder.Services.AddSingleton<ICacheService, MemoryCacheManager>();
 //builder.Services.AddMemoryCache();
 
-builder.Services.AddCors();
+
 
 
 
@@ -68,6 +68,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
    
 ServiceTool.Create(builder.Services);
 
+
+builder.Services.AddCors();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -75,14 +79,25 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    
 }
 
-app.UseCors(builder=>builder.WithOrigins("http:\\localhost:4200").AllowAnyHeader());
+
+app.UseCors(c =>
+{
+    c.WithOrigins("http://localhost:4200");
+    c.AllowAnyHeader();
+    c.AllowAnyMethod();
+
+
+});
+    
 app.UseHttpsRedirection();
 
 //app.UseAuthentication();
 
 app.UseAuthorization();
+
 
 
 
